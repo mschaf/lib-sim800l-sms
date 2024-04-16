@@ -13,9 +13,6 @@
 #ifndef LOCAL_CPP_TEST
 #include <Arduino.h>
 
-#ifndef SoftwareSerial_h
-#include <SoftwareSerial.h>
-#endif
 #endif
 
 #include "ScanUtil.h"       // c-string scan utilities
@@ -115,7 +112,7 @@ protected:  // for testing purposes
 private:
     unsigned long timeout = 15000L;  // Default timeout (12000ms)
 
-    SoftwareSerial *sim_module = NULL;
+    Stream *sim_module = NULL;
 
     VoidCallback resetCallback = NULL;
     BoolCallback netChangedCallback = NULL;
