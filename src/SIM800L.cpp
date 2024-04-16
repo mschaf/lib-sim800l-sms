@@ -25,7 +25,7 @@ void SIM800L::begin(SoftwareSerial *sim_module, VoidCallback rst)
 		printAndWaitOK(F("AT+CNMI=1,2,0,0,0")); // SMS Message Indications
 		printAndWaitOK(F("AT+CLIP=1"));			// Show incoming call telephone number
 		
-		_delay_ms(200);
+		delay(200);
 		run(); // read buffer
 
 		checkConnection();
@@ -108,7 +108,7 @@ void SIM800L::sendMessage(SMSMessage &sms)
 	if (sim_module != NULL)
 	{
 		sim_module->print(F("AT+CMGF=1\r\n")); // Select SMS Message Format (1 = text mode)
-		_delay_ms(100);
+		delay(100);
 		sim_module->print(F("AT+CMGS=\""));
 		sim_module->print(sms.phone);
 		sim_module->print(F("\"\r"));
@@ -116,7 +116,7 @@ void SIM800L::sendMessage(SMSMessage &sms)
 		for (int i = 0; i < sms.size && (sms.message[i] != NULLCHAR) && i < SMS_MESSAGE_MAX_LEN; i++)
 			sim_module->print(sms.message[i]);
 
-		_delay_ms(30);
+		delay(30);
 		sim_module->print(SMS_TERMINATOR);
 		sim_module->print(F("\r\n"));
 	}
@@ -228,7 +228,7 @@ void SIM800L::reset()
 		sim_module->print(F("AT+CFUN=1,1\r\n")); // Software Reset
 		sim_module->print(F("AT+CFUN=1,1\r\n")); // Software Reset
 		sim_module->print(F("AT+CFUN=1,1\r\n")); // Software Reset
-		_delay_ms(1000);
+		delay(1000);
 		readToBuffer(); // flush serial
 
 		if (resetCallback != NULL)
@@ -271,7 +271,7 @@ void SIM800L::printAndWaitOK(const __FlashStringHelper *msg)
 			sim_module->print(msg_buf);
 			sim_module->print(F("\r\n"));
 
-			_delay_ms(100); // without this delay it doesnt works (maybe a buffering problem)
+			delay(100); // without this delay it doesnt works (maybe a buffering problem)
 
 			if (sim_module->available()) // if we have some bytes
 			{
