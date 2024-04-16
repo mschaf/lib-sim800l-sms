@@ -11,7 +11,7 @@
 
 #define SMS_TERMINATOR (char)26 // required according to the datasheet
 
-void SIM800L::begin(SoftwareSerial *sim_module, VoidCallback rst)
+void SIM800L::begin(Stream *sim_module, VoidCallback rst)
 {
 	if (sim_module != NULL)
 	{
