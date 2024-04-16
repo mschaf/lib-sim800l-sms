@@ -233,8 +233,6 @@ void SIM800L::reset()
 
 		if (resetCallback != NULL)
 			this->resetCallback();
-
-		asm("jmp 0x0000");
 	}
 }
 
